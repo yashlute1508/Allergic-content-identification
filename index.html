@@ -3,33 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Check food ingredients for allergens using text or camera scanning">
     <meta name="theme-color" content="#4CAF50">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Allergen Checker</title>
+    <title>Allergen Checker - Food Ingredient Scanner</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Allergen Checker</h1>
+    <main>
+        <h1>Allergen Checker</h1>
 
-    <div class="container">
-        <h2 class="section-title">Your Allergy Profile</h2>
-        <div id="allergenList"></div>
-        <input type="text" id="newAllergen" placeholder="Enter an allergen (e.g., peanuts)" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;" autocomplete="off" autocapitalize="off">
-        <button onclick="addAllergen()">Add Allergen</button>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="exportProfile()" class="secondary">Export Profile</button>
-            <button onclick="importProfile()" class="secondary">Import Profile</button>
-        </div>
-    </div>
+        <section class="container" aria-labelledby="profile-title">
+            <h2 id="profile-title" class="section-title">Your Allergy Profile</h2>
+            <div id="allergenList" role="list" aria-label="List of your allergens"></div>
+            <div class="input-group">
+                <label for="newAllergen" class="visually-hidden">Enter a new allergen</label>
+                <input type="text" 
+                       id="newAllergen" 
+                       class="allergen-input"
+                       placeholder="Enter an allergen (e.g., peanuts)" 
+                       autocomplete="off" 
+                       autocapitalize="off"
+                       aria-label="Enter a new allergen">
+                <button onclick="addAllergen()" aria-label="Add allergen to your profile">Add Allergen</button>
+            </div>
+            <div class="button-group">
+                <button onclick="exportProfile()" class="secondary" aria-label="Export your allergy profile">Export Profile</button>
+                <button onclick="importProfile()" class="secondary" aria-label="Import an allergy profile">Import Profile</button>
+            </div>
+        </section>
 
-    <div class="container">
-        <h2 class="section-title">Check Ingredients</h2>
-        <textarea id="ingredients" placeholder="Paste ingredient list here..." autocomplete="off" autocapitalize="off"></textarea>
-        <button onclick="checkIngredients()">Check Ingredients</button>
-        <button class="warning" onclick="simulateScan()" title="This is a mock feature for demonstration">📸 Scan Label (Demo)</button>
-        <div id="result"></div>
-    </div>
+        <section class="container" aria-labelledby="check-title">
+            <h2 id="check-title" class="section-title">Check Ingredients</h2>
+            <div class="input-group">
+                <label for="ingredients" class="visually-hidden">Ingredient list to check</label>
+                <textarea id="ingredients" 
+                          placeholder="Paste ingredient list here..." 
+                          autocomplete="off" 
+                          autocapitalize="off"
+                          aria-label="Enter ingredients to check for allergens"></textarea>
+            </div>
+            <div class="button-group">
+                <button onclick="checkIngredients()" aria-label="Check ingredients for allergens">Check Ingredients</button>
+                <button class="warning" 
+                        onclick="simulateScan()" 
+                        aria-label="Scan food label with camera"
+                        title="Scan ingredients using your device's camera">📸 Scan Label</button>
+                <label for="imageUpload" class="upload-button warning" role="button" aria-label="Upload image of ingredients">
+                    📁 Upload Image
+                    <input type="file" 
+                           id="imageUpload" 
+                           accept="image/*" 
+                           style="display: none;" 
+                           onchange="handleImageUpload(event)" 
+                           aria-label="Choose image file of ingredients">
+                </label>
+            </div>
+            <div id="result" role="alert" aria-live="polite"></div>
+        </section>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.3/dist/tesseract.min.js"></script>
     <script src="script.js"></script>
