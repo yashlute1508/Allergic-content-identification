@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Allergen Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Allergen Checker</h1>
+
+    <div class="container">
+        <h2 class="section-title">Your Allergy Profile</h2>
+        <div id="allergenList"></div>
+        <input type="text" id="newAllergen" placeholder="Enter an allergen (e.g., peanuts)" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;" autocomplete="off" autocapitalize="off">
+        <button onclick="addAllergen()">Add Allergen</button>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="exportProfile()" class="secondary">Export Profile</button>
+            <button onclick="importProfile()" class="secondary">Import Profile</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Check Ingredients</h2>
+        <textarea id="ingredients" placeholder="Paste ingredient list here..." autocomplete="off" autocapitalize="off"></textarea>
+        <button onclick="checkIngredients()">Check Ingredients</button>
+        <button class="warning" onclick="simulateScan()" title="This is a mock feature for demonstration">📸 Scan Label (Demo)</button>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.3/dist/tesseract.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
